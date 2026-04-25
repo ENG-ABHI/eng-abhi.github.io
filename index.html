@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhishek | About Me</title>
+<link rel="stylesheet" href="extra.css">
+
+<style>
+
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    line-height: 1.6;
+}
+
+/* SIDE BACKGROUND PANELS */
+.side-bg {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 120px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Left and Right positioning */
+.side-bg.left {
+    left: 0;
+}
+
+.side-bg.right {
+    right: 0;
+}
+
+/* TECH GRID ANIMATION */
+.side-bg::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 200%;
+    background-image: 
+        linear-gradient(rgba(0,150,255,0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,150,255,0.15) 1px, transparent 1px);
+    background-size: 30px 30px;
+    animation: scrollGrid 20s linear infinite;
+}
+
+/* Animation */
+@keyframes scrollGrid {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-50%);
+    }
+}
+
+/* Hide on small screens */
+@media (max-width: 1000px) {
+    .side-bg {
+        display: none;
+    }
+}
+
+/* Header */
+header {
+    background: linear-gradient(to right, #1f1f1f, #3a3a3a);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+/* Profile Image */
+.profile {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-top: 15px;
+    border: 3px solid white;
+}
+
+/* Container */
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Sections */
+section {
+    background: white;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-5px);
+}
+
+/* Headings */
+h2 {
+    color: #333;
+}
+
+/* Form */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input, textarea {
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px;
+    background: #222;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #444;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px;
+    background: #222;
+    color: white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Side Animations -->
+<div class="side-bg left"></div>
+<div class="side-bg right"></div>
+
+<header>
+    <h1>Abhishek Dhaulakhandi</h1>
+    <img src="my_img.png" alt="Profile Image" class="profile">
+</header>
+
+<div class="container">
+
+    <section>
+        <h2>About Me</h2>
+        <p>
+            I am currently pursuing B.Tech in Computer Science Engineering from Uttaranchal University.
+            I have a strong interest in machine learning and deep learning.
+        </p>
+        <p>
+            I am actively learning about LSTM, RNN, and Vision Transformers.
+        </p>
+    </section>
+
+    <section>
+        <h2>Education</h2>
+        <p>
+            B.Tech in Computer Science Engineering<br>
+            Uttaranchal University
+        </p>
+    </section>
+
+    <section>
+        <h2>Projects</h2>
+        <ul>
+            <li><strong>Sentiment Analysis using Simple RNN</strong></li>
+            <li><strong>Finance Domain Chatbot using RAG (ChromaDB)</strong></li>
+            <li><strong>Brain Tumor Detection using CNN</strong></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Current Work</h2>
+        <p>
+            Junior Researcher at ISRO IIRS
+        </p>
+    </section>
+
+    <section>
+        <h2>Research Interests</h2>
+        <ul>
+            <li>Natural Language Processing (NLP)</li>
+            <li>Computer Vision</li>
+        </ul>
+    </section>
+
+   <section>
+    <h2>Contact Me</h2>
+
+    <form id="contact-form">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send</button>
+    </form>
+
+    <p id="status"></p>
+</section>
+
+</div>
+
+<footer>
+    <p>© 2026 Abhishek Dhaulakhandi</p>
+</footer>
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbwV_cbtsRmwgaJqz900F53-eTHqzgzuxY_yOB4jwcYX5ngb86M5YPf8KgwakLOONIV5Pw/exec";
+
+document.getElementById("contact-form").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        message: document.getElementById("message").value
+    };
+
+    try {
+      const response= await fetch(scriptURL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: `name=${encodeURIComponent(data.name)}&email=${encodeURIComponent(data.email)}&message=${encodeURIComponent(data.message)}`
+});
+        document.getElementById("status").innerText = "Message sent successfully!";
+        this.reset();
+
+    } catch (error) {
+        document.getElementById("status").innerText = "Error sending message.";
+    }
+});
+</script>
+</body>
+</html>
