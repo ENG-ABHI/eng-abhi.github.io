@@ -1,0 +1,30 @@
+/* Enhance side background (clean + modern) */
+.side-bg::before {
+    background-image: 
+        linear-gradient(rgba(0,150,255,0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,150,255,0.12) 1px, transparent 1px);
+}
+
+/* Add soft gradient glow behind sides */
+.side-bg {
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 150, 255, 0.05),
+        rgba(0, 0, 0, 0.02)
+    );
+}
+
+/* Slightly elevate main content */
+.container {
+    background: transparent;
+}
+
+/* Add subtle shadow for depth */
+section {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Smooth hover */
+section:hover {
+    transform: translateY(-6px);
+}
